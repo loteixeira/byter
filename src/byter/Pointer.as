@@ -4,13 +4,13 @@ package byter
 
 	public class Pointer
 	{
-		internal var _raw:ByteArray;
-		internal var _pos:uint;
+		private var _raw:ByteArray;
+		private var _pos:uint;
 
-		public function Pointer(_raw:ByteArray, _pos:int = -1)
+		public function Pointer(_raw:ByteArray, _pos:uint = uint.MAX_VALUE)
 		{
-			this._raw = raw;
-			this._pos = (_pos == -1 ? _raw.position : _pos);
+			this._raw = _raw;
+			this._pos = (_pos == nil ? _raw.position : _pos);
 		}
 
 		public function get raw():ByteArray
@@ -24,13 +24,19 @@ package byter
 			return _pos;
 		}
 
+		public function set pos(_pos:uint):void
+		{
+			this._pos = _pos;
+		}
+
 		public function get val():*
 		{
-			return NaN;
+			return _raw[_pos];
 		}
 
 		public function set val(_val:*):void
 		{
+			_raw[_pos] = val;
 		}
 	}
 }
