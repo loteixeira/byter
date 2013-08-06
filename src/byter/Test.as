@@ -34,14 +34,18 @@ package byter
 		private function start():void
 		{
 			var bytes:ByteArray = new ByteArray();
-			//var v:uint = int8(bytes, 42);
-			//cpln(int8(ptr(bytes, v)));
+			var p:Pointer = new Pointer(bool(bytes, true));
+			cpln("p = " + bool(p));
+			cpln("uint8 = " + uint8(p));
+			cpln("int8 = " + int8(p));
+			cpln("changing 'p'");
+			bool(p, false);
+			cpln("p = " + bool(p));
+			cpln("uint8 = " + uint8(p));
+			cpln("int8 = " + int8(p));
 
-			cpln(ByteArray.constructor.writeFloat);
-
-			/*var p:Pointer = new Pointer(bytes, bool(bytes, true));
-			bytes.position = 0;
-			cpln(bool(bytes));*/
+			//var p:Pointer = new Pointer(bytes, bool(bytes, true));
+			//cpln(bool(p));
 		}
 	}
 }
