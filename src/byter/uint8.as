@@ -2,21 +2,16 @@ package byter
 {
 	import flash.utils.*;
 
-	public function int8(source:*, value:* = null):*
+	public function uint8(source:*, value:* = null):*
 	{
-		if (source is ByteArray)
-		{
-			if (value == null)
-			{
-				return source.readUnsignedByte();
-			}
-			else
-			{
-				source.writeByte(value);
-				return source.position - 1;
-			}
-		}
+		var bytes:ByteArray = ptr(source);
 
-		throw new TypeError();
+		if (value == null)
+			return bytes.readUnsignedByte();
+
+		var p:uint = bytes.position;
+		bytes.writeByte(value);
+		bytes.position = p;
+		return bytes;
 	}
 }

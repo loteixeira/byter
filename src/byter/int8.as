@@ -4,19 +4,14 @@ package byter
 
 	public function int8(source:*, value:* = null):*
 	{
-		if (source is ByteArray)
-		{
-			if (value == null)
-			{
-				return source.readByte();
-			}
-			else
-			{
-				source.writeByte(value);
-				return source.position - 1;
-			}
-		}
+		var bytes:ByteArray = ptr(source);
 
-		throw new TypeError();
+		if (value == null)
+			return bytes.readByte();
+
+		var p:uint = bytes.position;
+		bytes.writeByte(value);
+		bytes.position = p;
+		return bytes;
 	}
 }

@@ -4,19 +4,14 @@ package byter
 
 	public function float32(source:*, value:* = null):*
 	{
-		var bytes:ByteArray;
-
-		if (source is ByteArray)
-			bytes = source;
-		else if (source is Pointer)
-			bytes = source.raw;
-		else
-			throw new TypeError();
+		var bytes:ByteArray = ptr(source);
 
 		if (value == null)
-			return source.readFloat();
+			return bytes.readFloat();
 
-		source.writeFloat(value);
-		return source.position - 4;
+		var p:uint = bytes.position;
+		bytes.writeFloat(value);
+		bytes.position = p;
+		return bytes;
 	}
 }

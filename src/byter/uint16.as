@@ -4,19 +4,14 @@ package byter
 
 	public function uint16(source:*, value:* = null):*
 	{
-		if (source is ByteArray)
-		{
-			if (value == null)
-			{
-				return source.readUnsignedShort();
-			}
-			else
-			{
-				source.writeShort(value);
-				return source.position - 2;
-			}
-		}
+		var bytes:ByteArray = ptr(source);
 
-		throw new TypeError();
+		if (value == null)
+			return bytes.readUnsignedShort();
+
+		var p:uint = bytes.position;
+		bytes.writeShort(value);
+		bytes.position = p;
+		return bytes;
 	}
 }

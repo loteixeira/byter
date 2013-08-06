@@ -4,19 +4,14 @@ package byter
 
 	public function bool(source:*, value:* = null):*
 	{
-		var bytes:ByteArray;
-
-		if (source is ByteArray)
-			bytes = source;
-		else if (source is Pointer)
-			bytes = source.raw;
-		else
-			throw new TypeError();
+		var bytes:ByteArray = ptr(source);
 
 		if (value == null)
-			return source.readBoolean();
+			return bytes.readBoolean();
 
-		source.writeBoolean(value);
-		return source.position - 1;
+		var p:uint = bytes.position;
+		bytes.writeBoolean(value);
+		bytes.position = p;
+		return bytes;
 	}
 }

@@ -4,19 +4,14 @@ package byter
 
 	public function int32(source:*, value:* = null):*
 	{
-		if (source is ByteArray)
-		{
-			if (value == null)
-			{
-				return source.readInt();
-			}
-			else
-			{
-				source.writeInt(value);
-				return source.position - 4;
-			}
-		}
+		var bytes:ByteArray = ptr(source);
 
-		throw new TypeError();
+		if (value == null)
+			return bytes.readInt();
+
+		var p:uint = bytes.position;
+		bytes.writeInt(value);
+		bytes.position = p;
+		return bytes;
 	}
 }

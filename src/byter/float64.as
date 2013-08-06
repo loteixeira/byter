@@ -2,21 +2,16 @@ package byter
 {
 	import flash.utils.*;
 
-	public function float32(source:*, value:* = null):*
+	public function float64(source:*, value:* = null):*
 	{
-		if (source is ByteArray)
-		{
-			if (value == null)
-			{
-				return source.readDouble();
-			}
-			else
-			{
-				source.writeDouble(value);
-				return source.position - 8;
-			}
-		}
+		var bytes:ByteArray = ptr(source);
 
-		throw new TypeError();
+		if (value == null)
+			return bytes.readDouble();
+
+		var p:uint = bytes.position;
+		bytes.writeDouble(value);
+		bytes.position = p;
+		return bytes;
 	}
 }
