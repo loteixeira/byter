@@ -2,11 +2,11 @@ package byter
 {
 	import flash.utils.*;
 
-	public function ptr(source:*, pos:int = -1):*
+	public function ptr(source:*, pos:uint = uint.MAX_VALUE):ByteArray
 	{
 		if (source is ByteArray)
 		{
-			if (pos > -1)
+			if (pos != nil)
 				source.position = pos;
 
 			return source;
