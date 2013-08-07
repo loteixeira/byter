@@ -4,8 +4,8 @@ package byter
 
 	public class Pointer
 	{
-		protected var _raw:ByteArray;
-		protected var _pos:uint;
+		internal var _raw:ByteArray;
+		internal var _pos:uint;
 
 		public function Pointer(source:*, _pos:uint = uint.MAX_VALUE)
 		{
