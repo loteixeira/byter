@@ -11,7 +11,7 @@ SOURCE_PATH=src/
 
 # demo stuff
 DEMO_BIN=bin/byter-test.swf
-DEMO_MAIN=src/byter/Test.as
+DEMO_MAIN=src/byter/test/Test.as
 DEMO_FLAGS=-debug=false -static-link-runtime-shared-libraries=true -library-path+=lib/
 
 # library stuff
