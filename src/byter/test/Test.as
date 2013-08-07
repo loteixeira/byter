@@ -1,6 +1,8 @@
-package byter
+package byter.test
 {
 	import br.dcoder.console.*;
+
+	import byter.*;
 
 	import flash.display.*;
 	import flash.events.*;
