@@ -34,18 +34,40 @@ package byter
 		private function start():void
 		{
 			var bytes:ByteArray = new ByteArray();
-			var p:Pointer = new Pointer(bool(bytes, true));
-			cpln("p = " + bool(p));
-			cpln("uint8 = " + uint8(p));
-			cpln("int8 = " + int8(p));
+			var p:Pointer = new Pointer(uint8(bytes, -1));
+			cpln("p = " + uint8(p));
 			cpln("changing 'p'");
-			bool(p, false);
-			cpln("p = " + bool(p));
-			cpln("uint8 = " + uint8(p));
-			cpln("int8 = " + int8(p));
+			uint8(p, 1);
+			cpln("p = " + uint8(p));
 
-			//var p:Pointer = new Pointer(bytes, bool(bytes, true));
-			//cpln(bool(p));
+			var pp:UInt8Pointer = new UInt8Pointer(p);
+			cpln(pp.val);
+
+			var p2:Pointer = new Pointer(bytes, bytes.length);
+			uint8(p2, 11);
+			cpln(p2.val);
+
+			memcpy(p2, p, 1);
+			cpln(p2.val);
+
+			cpln(sizeof(float64));
+
+			cpln("---");
+
+			//cpln(char(105));
+
+			var p3:Pointer = new Pointer(bytes, bytes.length);
+			var start:uint = bytes.length;
+			//bytes.length += 10;
+			memset(p3, 0, 10);
+			memcpy(p3, "oee", 10);
+			//str(p3, "oi");
+			cpln("'" + str(p3, 10) + "'");
+
+			for (; p3.pos < start + 10; p3.pos++)
+			{
+				cpln(p3.val);
+			}
 		}
 	}
 }
