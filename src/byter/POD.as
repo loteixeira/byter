@@ -4,20 +4,19 @@ package byter
 
 	public class POD
 	{
-		private var basePointer:Pointer;
-		private var count:uint;
+		private var _base:Pointer;
 		private var _len:uint;
-		private var _i:uint.
+		private var _i:uint;
 		private var sizes:Array;
 		private var offsets:Array;
 
 		public function POD(src:*, def:Array)
 		{
-			basePointer = new Pointer(ptr(src));
+			_base = new Pointer(ptr(src));
 
-			count = defs.length;
 			sizes = [];
 			offsets = [];
+			var count:uint = defs.length;
 			var accum:uint = 0;
 
 			for (var i:uint = 0; i < count; i++)
@@ -34,7 +33,7 @@ package byter
 
 		public function get base():ByteArray
 		{
-			return basePointer.raw;
+			return _base.raw;
 		}
 
 		public function get len():uint
