@@ -4,12 +4,12 @@ package byter
 
 	public class Pointer
 	{
-		private var _raw:ByteArray;
-		private var _pos:uint;
+		protected var _raw:ByteArray;
+		protected var _pos:uint;
 
-		public function Pointer(_raw:ByteArray, _pos:uint = uint.MAX_VALUE)
+		public function Pointer(source:*, _pos:uint = uint.MAX_VALUE)
 		{
-			this._raw = _raw;
+			_raw = ptr(source, _pos);
 			this._pos = (_pos == nil ? _raw.position : _pos);
 		}
 
