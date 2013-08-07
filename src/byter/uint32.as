@@ -10,7 +10,7 @@ package byter
 			return bytes.readUnsignedInt();
 
 		var p:uint = bytes.position;
-		bytes.writeInt(value);
+		bytes.writeUnsignedInt(value);
 		bytes.position = p;
 		return bytes;
 	}
