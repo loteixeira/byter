@@ -17,6 +17,8 @@ package byter
 			return 4;
 		if (type == float64 || type is Number || type is Float64Pointer)
 			return 8;
+		if (type is POD)
+			return type.len;
 
 		throw new TypeError();
 	}

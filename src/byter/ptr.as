@@ -15,6 +15,10 @@ package byter
 		{
 			return source.raw;
 		}
+		else if (source is POD)
+		{
+			return source.base;
+		}
 
 		throw new TypeError();
 	}

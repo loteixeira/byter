@@ -19,6 +19,12 @@ package byter
 			return _raw;
 		}
 
+		public function set raw(source:*):void
+		{
+			_raw = ptr(source);
+			_pos = _raw.position;
+		}
+
 		public function get pos():uint
 		{
 			return _pos;

@@ -2,7 +2,7 @@ package byter
 {
 	import flash.utils.*;
 
-	public function memcpy(dest:*, src:*, size:uint):*
+	public function memcpy(dest:*, src:*, size:uint):ByteArray
 	{
 		tmp.position = 0;
 
@@ -19,8 +19,9 @@ package byter
 
 		tmp.position = 0;
 		var bytes:ByteArray = ptr(dest);
+		var pos:uint = bytes.position;
 		bytes.writeBytes(tmp, 0, tmp.length);
-		bytes.position = 0;
+		bytes.position = pos;
 		return bytes;
 	}
 }
