@@ -6,7 +6,7 @@ package byter
 	{
 		if (source is ByteArray)
 		{
-			if (pos != nil)
+			if (pos != uint.MAX_VALUE)
 				source.position = pos;
 
 			return source;
@@ -18,6 +18,10 @@ package byter
 		else if (source is POD)
 		{
 			return source.base;
+		}
+		else if (source == null)
+		{
+			return null;
 		}
 
 		throw new TypeError();

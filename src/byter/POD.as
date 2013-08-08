@@ -51,7 +51,7 @@ package byter
 			return _i;
 		}
 
-		public function set(_i:uint):void
+		public function set i(_i:uint):void
 		{
 			this._i = _i;
 		}
@@ -59,7 +59,10 @@ package byter
 		public function field(index:uint):*
 		{
 			var bytes:ByteArray = _basePointer._raw;
-			bytes.position += _i * _len + offsets[index];
+
+			if (bytes)
+				bytes.position += _i * _len + offsets[index];
+
 			return bytes;
 		}
 
@@ -71,10 +74,14 @@ package byter
 		public function reset(n:uint = 1):void
 		{
 			var bytes:ByteArray = _basePointer.raw;
-			var l:uint = n * _len;
 
-			for (var i:uint = 0; i < l; i++)
-				bytes.writeByte(0);
+			if (bytes)
+			{
+				var l:uint = n * _len;
+
+				for (var i:uint = 0; i < l; i++)
+					bytes.writeByte(0);
+			}
 		}
 	}
 }

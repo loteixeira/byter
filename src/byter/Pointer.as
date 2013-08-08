@@ -10,19 +10,25 @@ package byter
 		public function Pointer(source:*, _pos:uint = uint.MAX_VALUE)
 		{
 			_raw = ptr(source, _pos);
-			this._pos = (_pos == nil ? _raw.position : _pos);
+
+			if (_raw)
+				this._pos = (_pos == nil ? _raw.position : _pos);
 		}
 
 		public function get raw():ByteArray
 		{
-			_raw.position = _pos;
+			if (_raw)
+				_raw.position = _pos;
+
 			return _raw;
 		}
 
 		public function set raw(source:*):void
 		{
 			_raw = ptr(source);
-			_pos = _raw.position;
+
+			if (_raw)
+				_pos = _raw.position;
 		}
 
 		public function get pos():uint
@@ -37,12 +43,16 @@ package byter
 
 		public function get val():*
 		{
-			return _raw[_pos];
+			if (_raw)
+				return _raw[_pos];
+
+			return null;
 		}
 
 		public function set val(_val:*):void
 		{
-			_raw[_pos] = val;
+			if (_raw)
+				_raw[_pos] = val;
 		}
 	}
 }
