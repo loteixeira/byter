@@ -4,6 +4,8 @@ package byter
 
 	public function sizeof(type:*):uint
 	{
+		if (type is POD)
+			return type.len;
 		if (type == bool || type == uint8 || type == int8 ||
 			type is Boolean || type is BoolPointer || type is UInt8Pointer ||
 			type is Int8Pointer || type is Pointer || type is ByteArray)
@@ -17,8 +19,6 @@ package byter
 			return 4;
 		if (type == float64 || type is Number || type is Float64Pointer)
 			return 8;
-		if (type is POD)
-			return type.len;
 
 		throw new TypeError();
 	}
