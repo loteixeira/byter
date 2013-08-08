@@ -4,15 +4,15 @@ package byter
 
 	public class POD
 	{
-		private var _base:Pointer;
+		private var _basePointer:Pointer;
 		private var _len:uint;
 		private var _i:uint;
 		private var sizes:Array;
 		private var offsets:Array;
 
-		public function POD(src:*, def:Array)
+		public function POD(src:*, defs:Array)
 		{
-			_base = new Pointer(ptr(src));
+			_basePointer = new Pointer(src);
 
 			sizes = [];
 			offsets = [];
@@ -33,7 +33,12 @@ package byter
 
 		public function get base():ByteArray
 		{
-			return _base.raw;
+			return _basePointer.raw;
+		}
+
+		public function set base(source:*):void
+		{
+			_basePointer.raw = ptr(source);
 		}
 
 		public function get len():uint
@@ -53,8 +58,8 @@ package byter
 
 		public function field(index:uint):*
 		{
-			var bytes:ByteArray = basePointer._raw;
-			bytes.position = basePointer.pos + _i * _len + offsets[index];
+			var bytes:ByteArray = _basePointer._raw;
+			bytes.position += _i * _len + offsets[index];
 			return bytes;
 		}
 
@@ -65,7 +70,7 @@ package byter
 
 		public function reset(n:uint = 1):void
 		{
-			var bytes:ByteArray = basePointer.raw;
+			var bytes:ByteArray = _basePointer.raw;
 			var l:uint = n * _len;
 
 			for (var i:uint = 0; i < l; i++)
